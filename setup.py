@@ -13,6 +13,8 @@ setup(name='client',
       options={"build_exe": build_exe_options},
       executables=[Executable("client.py")])
 
+# client doesn't seem to work for some reason
+
 setup(name='server',
       version="0.1",
       description="py chat server",
