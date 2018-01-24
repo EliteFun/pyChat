@@ -14,8 +14,12 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def receiveData():
     while True:
-        d = s.recv(1024)
-        print(d.decode())
+        try:
+            d = s.recv(1024)
+            print(d.decode())
+        except:
+            print("Error: server disconected")
+            break
 
 
 receiveThread = threading.Thread(
