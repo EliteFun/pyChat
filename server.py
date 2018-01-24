@@ -24,9 +24,9 @@ class Client:
         else:
             return False
 
-    def sendData(self, data):
+    def sendData(self, data, name):
         try:
-            message = '(' + self.name + ') ' + data
+            message = '(' + name + ') ' + data
             self.connection.send(str.encode(message))
         except:
             return False
@@ -65,7 +65,7 @@ class ThreadedServer():
                         c.setName(data[8:])
                         print('changed client name')
                     else:
-                        self.sendToClients(data)
+                        self.sendToClients(data, c.name)
                         print(data)
                 else:
                     raise ('Client {} disconnected'.format(address))
@@ -76,10 +76,10 @@ class ThreadedServer():
                 self.clients.remove(c)
                 return False
 
-    def sendToClients(self, m):
+    def sendToClients(self, m, n):
         for c in self.clients:
             try:
-                c.sendData(m)
+                c.sendData(m, n)
             except:
                 print("error while sending data to client. Maybe he disconnected?")
                 self.clients.remove(c)
